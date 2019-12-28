@@ -12,6 +12,8 @@
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 导入bootstrap的js文件 -->
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 导入封装的http.js文件，内部通过 beforeSend 给 xhr 对象添加请求头 -->
+    <script src="./js/http.js"></script>
   </head>
 
   <body>
@@ -84,22 +86,22 @@
     <script>
       $(function() {
         //获取有没有 token令牌
-        const token = localStorage.getItem("token");
-        //没有令牌跳转登入页面(登入接口用户获取令牌的)
-        if (!token) {
-          location.href = "./login.html";
-        }
+        // const token = localStorage.getItem("token");
+        // //没有令牌跳转登入页面(登入接口用户获取令牌的)
+        // if (!token) {
+        //   location.href = "./login.html";
+        // }
 
         $.ajax({
           // type:'get',
           //获取用户信息的接口
           url: "http://localhost:8080/api/v1/admin/user/info",
           //设置请求头
-          headers: {
-            //token令牌 告诉服务器是哪个用户要访问数据
-            //Authorization 翻译过来是授权的意思,值就是 token
-            Authorization: token
-          },
+        //   headers: {
+        //     //token令牌 告诉服务器是哪个用户要访问数据
+        //     //Authorization 翻译过来是授权的意思,值就是 token
+        //     Authorization: token
+        //   },
           success: function(response) {
             console.log(response);
             const nickname = response.data.nickname;
